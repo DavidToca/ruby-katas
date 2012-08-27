@@ -31,7 +31,49 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  
+  score = 0
+
+  counts = {}
+
+  10.times{|x| counts[x]=count_all(dice,x)}
+
+  #first rule
+
+  if counts[1] >=3 
+    score+=1000
+    counts[1]-=3
+  end
+  #rule of tree 
+  9.times do |x|
+    
+    if counts[x]>=3
+      score+=100*x
+      counts[x]-=3
+    end
+
+  end
+  
+  #sum of 1 and 5
+  
+  score+=100*counts[1]
+
+  score+=50*counts[5]
+
+  score
 end
+
+
+
+def count_all(dice,numb)
+
+#  dice.inject{ |sum,x|  sum+=(if x == numb then 1 else 0)}
+
+  dice.select{|x| x==numb }.size
+
+end
+
+puts score [1,1,1,3,4,1]
 
 class AboutScoringProject < EdgeCase::Koan
   def test_score_of_an_empty_list_is_zero
