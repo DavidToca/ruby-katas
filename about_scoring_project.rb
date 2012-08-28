@@ -44,7 +44,8 @@ def score(dice)
     score+=1000
     counts[1]-=3
   end
-  #rule of tree 
+  
+  #second rule
   9.times do |x|
     
     if counts[x]>=3
@@ -54,10 +55,12 @@ def score(dice)
 
   end
   
-  #sum of 1 and 5
+  #three rule
   
   score+=100*counts[1]
-
+  
+  #four rule
+  
   score+=50*counts[5]
 
   score
